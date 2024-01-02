@@ -46,6 +46,36 @@ namespace FiltexNet.Constants
 
         public string Name { get; }
 
+        public Operator ToOperator()
+        {
+            var map = new Dictionary<TokenType, Operator>
+            {
+                { TokenTypeEqual, Operator.OperatorEqual },
+                { TokenTypeNotEqual, Operator.OperatorNotEqual },
+                { TokenTypeGreaterThan, Operator.OperatorGreaterThan },
+                { TokenTypeGreaterThanOrEqual, Operator.OperatorGreaterThanOrEqual },
+                { TokenTypeLessThan, Operator.OperatorLessThan },
+                { TokenTypeLessThanOrEqual, Operator.OperatorLessThanOrEqual },
+                { TokenTypeBlank, Operator.OperatorBlank },
+                { TokenTypeNotBlank, Operator.OperatorNotBlank },
+                { TokenTypeContain, Operator.OperatorContain },
+                { TokenTypeNotContain, Operator.OperatorNotContain },
+                { TokenTypeStartWith, Operator.OperatorStartWith },
+                { TokenTypeNotStartWith, Operator.OperatorNotStartWith },
+                { TokenTypeEndWith, Operator.OperatorEndWith },
+                { TokenTypeNotEndWith, Operator.OperatorNotEndWith },
+                { TokenTypeIn, Operator.OperatorIn },
+                { TokenTypeNotIn, Operator.OperatorNotIn }
+            };
+
+            if (map.TryGetValue(this, out var op))
+            {
+                return op;
+            }
+
+            return Operator.OperatorUnknown;
+        }
+
         public bool IsFieldTokenType()
         {
             return ArrayUtils.IsInAny(this, new[]
