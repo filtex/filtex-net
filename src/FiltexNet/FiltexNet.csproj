@@ -8,5 +8,9 @@
         <InternalsVisibleTo Include="FiltexNet.Tests"/>
     </ItemGroup>
 
+    <ItemGroup>
+        <PackageReference Include="MongoDB.Driver" Version="2.16.1"/>
+    </ItemGroup>
+
 </Project>
   
