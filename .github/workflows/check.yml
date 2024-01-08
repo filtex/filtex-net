@@ -1,0 +1,33 @@
+name: Build & Test
+
+on:
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-20.04
+    name: Build & Test
+
+    steps: 
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Setup
+        uses: actions/setup-dotnet@v3
+        with:
+          dotnet-version: '5.0.x'
+
+      - name: Build
+        env:
+          SOLUTIONFILE: FiltexNet.sln
+          VERSION: 1.0.0
+        run: |
+          bash ./scripts/build.sh
+
+      - name: Test
+        env:
+          SOLUTIONFILE: FiltexNet.sln
+        run: |
+          bash ./scripts/test.sh
